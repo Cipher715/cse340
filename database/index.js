@@ -12,7 +12,7 @@ if (process.env.NODE_ENV == "development") {
     connectionString: process.env.DATABASE_URL,
     ssl: {
       rejectUnauthorized: false,
-    },
+    }
 })
 
 // Added for troubleshooting queries
@@ -27,7 +27,7 @@ module.exports = {
       console.error("error in query", { text })
       throw error
     }
-  },
+  }
 }
 } else {
   pool = new Pool({
