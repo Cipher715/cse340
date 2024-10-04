@@ -44,7 +44,6 @@ nav{
   padding: .5rem;
   width: 100%;
   background-color: var(--primary-color);
-  color: white;
 }
 
 nav ul{
@@ -56,6 +55,10 @@ nav ul{
 
 nav ul li{
   list-style: none;
+}
+
+nav ul li a {
+  color: white;
 }
 
 h1{
