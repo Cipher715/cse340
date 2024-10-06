@@ -34,6 +34,28 @@ Util.buildClassificationGrid = async function(data){
     return grid
 };
 
+/* **************************************
+* Build the detail view HTML
+* ************************************ */
+Util.buildVehicleDetail = async function(data) {
+  let detail
+  if(data){
+    detail ='<div id="vehicle-detail">'
+    detail += '<img src="' + data.inv_image + '" alt="Image of '
+    + data.inv_make + ' ' + data.inv_model 
+    +' on CSE Motors" >'
+    detail += '<div id="vehicle-desc"> <h2>' + data.inv_make + ' ' + data.inv_model + ' Details </h2>'
+    detail += '<p><b>Price: $</b>' + new Intl.NumberFormat('en-US').format(data.inv_price) + '</p>'
+    detail += '<p><b>Description: </b>' + data.inv_description + '</p>'
+    detail += '<p><b>Color: </b>' + data.inv_color + '</p>'
+    detail += '<p><b>Miles: </b>' + new Intl.NumberFormat('en-US').format(data.inv_miles) + '</p>'
+    detail += '</div>'
+  } else { 
+    detail += '<p class="notice">Sorry, the vehicle is currently not available.</p>'
+  }
+  return detail
+};
+
 
 /* ************************
  * Constructs the nav HTML unordered list

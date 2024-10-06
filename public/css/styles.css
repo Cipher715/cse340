@@ -18,14 +18,17 @@
   --accent1-color: #a0f49f;
   --accent2-color: #cdc392;
 }
-.checker{
-  display: none;
+
+
+main {
+  padding: 0 2vw;
 }
 
 #top-header{
   display: flex;
   flex-direction: row;
-  margin-bottom: 1rem;  
+  margin: 1rem 0;
+  padding: 0 2vw;
 }
 
 .siteName a{
@@ -38,7 +41,11 @@
 
 #tools {
   margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
 }
+
 
 nav{
   padding: .5rem;
@@ -62,7 +69,7 @@ nav ul li a {
 }
 
 h1{
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-family: var(--heading-font);
 }
 
@@ -145,10 +152,113 @@ h1{
   margin: 0;
 }
 
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 45px 3%;
+  justify-content: center;
+  padding-left: 0px;
+}
+
+#inv-display li{
+  width: 250px;
+  list-style: none;
+  display: grid;
+  grid-template-rows: 180px 150px;
+  border-radius: 10px;
+  border: solid black 1px;
+  
+}
+
+#inv-display a{
+  grid-row: 1/2;
+}
+
+#inv-display img{
+  width: 99%;
+  border-radius: 10px 10px 0 0;
+}
+
+.namePrice {
+  display: block;
+}
+
+.namePrice hr{
+  height: 5px;
+  width: 250px;
+  background-color: black;
+}
+
+.namePrice h2{
+  text-align: center;
+}
+.namePrice h2 a{
+  font-size: 1.2rem;
+}
+.namePrice span {
+  display: block;
+  text-align: center;
+}
+
+#vehicle-detail img{
+  width: 100%;
+}
+
+#vehicle-desc h2 {
+  font-size: 1.5rem;
+}
+
+#vehicle-desc p{
+  margin: 0;
+  padding: 2vw;
+}
+
+#vehicle-desc p:nth-child(even) {
+  background-color: rgb(240, 239, 239);
+}
+
+.class-name, .vehicle-name {
+  font-family: var(--paragraph-font);
+}
+
+#errBtn {
+  width: 100px;
+  height: 30px;
+  font-size: 1rem;
+  border: solid black thin;
+  background-color: lightgray;
+  display: block;
+}
+
+#errBtn p{
+  margin: 0;
+  text-align: center;
+}
+
+
+footer {
+  padding: 0 2vw;
+  padding-bottom: 2vw;
+}
+
+#errTitle {
+  font-family: var(--paragraph-font);
+}
+
+#errMsg{
+  font-size: 1.2rem;
+}
+
 @media only screen and (min-width: 800px) {
+
+  .welcome{
+    padding-left: 2vw;
+
+  }
+
   
   body{
-    background-image: url("/images/site/checkerboard.jpg");
+    background-image: url("/images/site/small_check.jpg");
     background-size: cover;
     margin: 0;
   }
@@ -202,4 +312,17 @@ h1{
     grid-column: 2/3;
   }
   
+  #vehicle-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2vw;
+  }
+
+  #vehicle-detail img{
+    grid-column: 1/2;
+    width: 100%;
+  }
+
+
+
 }
