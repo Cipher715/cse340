@@ -75,7 +75,7 @@ h1{
 
 .hero{
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(16, 1fr);
 }
 
 .large{
@@ -87,7 +87,7 @@ h1{
 }
 
 .hero img {
-  grid-area: 1/1/4/9;
+  grid-area: 1/2/4/16;
   width: 100%;
 }
 
@@ -95,10 +95,9 @@ h1{
 .pickup{
   font-family: var(--paragraph-font);
   color: var(--secondary-color);
-  grid-area: 1/1/2/4;
+  grid-area: 1/2/2/8;
   background-color: rgb(207, 236, 248, .5);
   margin: 0 auto;
-
 }
 
 .pickup h2{
@@ -291,7 +290,7 @@ footer {
   }
 
   .pickup{
-    grid-area: 2/2/3/4;
+    grid-area: 2/2/3/6;
   }
 
   .pickup h2, .pickup p, button{
