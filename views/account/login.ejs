@@ -1,0 +1,23 @@
+<% if (title) { %>
+    <h1 class="login-Title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<% if (messages) { %>
+    <%- messages() %>
+    <%}%> 
+
+<form action="#" class="login-form">
+    <fieldset>
+        <p>Email:</p>
+        <input type="email" name="account_email" id="account_email" placeholder="someone@gmail.com" required>
+        <p>Password:</p>
+        <input type="text" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+        <p>Password must have 12 characters minimum, at least 1 capital letter, 1 number, and 1 special character.</p>
+        <div class="submit"><input type="submit" value="LOGIN"></div>
+        <div class="red-register">
+            <p>No Account? <a href="/account/register">Sign-up</a></p>
+        </div>
+    </fieldset>
+</form>
