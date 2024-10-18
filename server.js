@@ -16,7 +16,8 @@ const accountRoute = require("./routes/accountRoute");
 const utilities = require("./utilities/");
 const session = require("express-session");
 const pool = require('./database/');
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+
 
 
 /* ***********************
