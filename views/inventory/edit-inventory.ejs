@@ -1,5 +1,5 @@
 <% if (title) { %>
-    <h1 class="add-inventory-title"><%= title %></h1>
+    <h1 class="edit-inventory-title"><%= title %></h1>
     <% } else {
       res.redirect('/')
 } %>
@@ -16,11 +16,11 @@
     </ul>
 <% } %>
 
-<form action="/inv/add-inventory" method="post" class="add-inv-form">
+<form action="/inv/update" method="post" id="edit-inv-form">
     <fieldset>
         <legend>All fields are REQIORED!!</legend>
         <label for="classificationList">Classification</label>
-        <%- classificationList %>
+        <%- classificationSelect %>
         <label for="inv_make">Make</label>
         <input type="text" name="inv_make" id="inv_make" placeholder="Min of 3 characters" required value="<%= locals.inv_make %>" pattern=".{3,}">
         <label for="inv_model">Model</label>
@@ -39,7 +39,12 @@
         <input type="text" name="inv_miles" id="inv_miles" placeholder="digits only" required value="<%= locals.inv_miles %>" pattern="[0-9]+">
         <label for="inv_color">Color</label>
         <input type="text" name="inv_color" id="inv_color" required value="<%= locals.inv_color %>">
-        <div class="add-inv"><input type="submit" value="Add Inventory"></div>
+        <div class="modify-inv"><input type="submit" name="submit" id="submit" value="Update Vehicle" disabled></div>
+        <input type="hidden" name="inv_id"
+            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+            <% } %>>
     </fieldset>
 
 </form>
+
+<script src="../../js/inv-update.js"></script>
