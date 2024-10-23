@@ -46,6 +46,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
+  gap: 2vw;
 }
 
 
@@ -311,6 +312,10 @@ input:required:invalid, input:focus:invalid, textarea:required:invalid, textarea
 
 input:required:valid, textarea:required:valid, select:required:valid {
  border-right: var(--valid-border);
+}
+
+.warning {
+  color: red;
 }
 
 #inventoryDisplay {

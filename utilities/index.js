@@ -1,4 +1,6 @@
+const { user } = require("pg/lib/defaults");
 const invModel = require("../models/inventory-model");
+const accModel = require("../models/account-model");
 const Util = {};
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -82,6 +84,26 @@ Util.getNav = async function (req, res, next) {
     return list;
 };
 
+Util.getHeader = async function (req, res, next) {
+  let tools = '<a '
+  if (req.cookies.jwt) {
+    let token = req.cookies.jwt;
+    let userId;
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        return res.status(403).send('Invalid token');
+      }
+      userId = decoded.account_id;
+    });
+    let userInfo = await accModel.getAccountById(userId);
+    tools += 'title="go to account page" href="/account">Welcome ' + userInfo.account_firstname + '</a>'
+    tools += '<a title="Click to log out" href="/account/logout">LogOut</a>'
+  } else {
+    tools += 'title="Click to log in" href="/account/login">My Account</a>'
+  }
+  return tools
+}
+
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications()
   let classificationList =
@@ -124,7 +146,7 @@ Util.checkJWTToken = (req, res, next) => {
       return res.redirect("/account/login")
      }
      res.locals.accountData = accountData
-     res.locals.loggedin = 1
+     res.locals.loggedin = true
      next()
     })
   } else {
@@ -144,6 +166,26 @@ Util.checkLogin = (req, res, next) => {
   }
 }
 
-
+Util.checkAccountType = (req, res, next) => {
+  if (req.cookies.jwt) {
+    let token = req.cookies.jwt;
+    let userInfo;
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        return res.status(403).send('Invalid token');
+      }
+      userInfo = decoded;
+    });
+    if (userInfo.account_type == 'Employee' || userInfo.account_type == 'Admin'){
+      next();
+    } else {
+      req.flash("notice", "Access denied. Please log in.")
+      return res.redirect("/account/login")
+    }
+  } else {
+    req.flash("notice", "Access denied. Please log in.")
+    return res.redirect("/account/login")
+  }
+}
 
 module.exports = Util;

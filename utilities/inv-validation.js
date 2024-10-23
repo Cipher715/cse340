@@ -102,10 +102,12 @@ validate.checkClassData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
+      let tools = await utilities.getHeader(req);
       res.render("inventory/add-classification", {
         errors,
         title: "Add New Classification",
         nav,
+        tools,
       })
       return
     }
@@ -121,12 +123,13 @@ validate.checkInvData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
+      let tools = await utilities.getHeader(req);
       let classificationList = await utilities.buildClassificationList(classification_id);
-      let descriptionInput = req.body.inv_description;
       res.render("inventory/add-inventory", {
         errors,
         title: "Add New Inventory",
         nav,
+        tools,
         classificationList,
         inv_make,
         inv_model,
@@ -152,11 +155,13 @@ validate.checkUpdateData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
+      let tools = await utilities.getHeader(req);
       let classificationSelect = await utilities.buildClassificationList(classification_id);
       res.render("inventory/edit-inventory", {
         errors,
         title: "Edit " + inv_make + " " + inv_model,
         nav,
+        tools,
         classificationSelect,
         inv_make,
         inv_model,

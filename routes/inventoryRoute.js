@@ -6,22 +6,26 @@ const invValidate = require("../utilities/inv-validation");
 
 
 // Route to build inventory by classification view
-router.get("/type/:classificationId",utilities.handleErrors(invController.buildByClassificationId));
+router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 // Route to build inventory detail view
 router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId));
 // Route to build inventory management view
-router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get("/", utilities.checkAccountType, utilities.handleErrors(invController.buildManagement));
 // Route to build add classification view
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClass));
+router.get("/add-classification", utilities.checkAccountType, utilities.handleErrors(invController.buildAddClass));
 // Route to build add inventory view
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInv));
+router.get("/add-inventory", utilities.checkAccountType, utilities.handleErrors(invController.buildAddInv));
 // Route to build management view with table
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+router.get("/getInventory/:classification_id", utilities.checkAccountType, utilities.handleErrors(invController.getInventoryJSON));
 // Route to build inventory edit view
-router.get("/edit/:invId", utilities.handleErrors(invController.editInventoryView))
+router.get("/edit/:invId", utilities.checkAccountType, utilities.handleErrors(invController.editInventoryView))
+// Route to build inventory deletion view
+router.get("/delete/:invId", utilities.checkAccountType, utilities.handleErrors(invController.deleteInventoryView));
+
 
 // Route to post new classification
 router.post("/add-classification", 
+    utilities.checkAccountType,
     invValidate.addClassRules(),
     invValidate.checkClassData,
     utilities.handleErrors(invController.addClass)
@@ -29,6 +33,7 @@ router.post("/add-classification",
 
 // Route to post new inventory
 router.post("/add-inventory",
+    utilities.checkAccountType,
     invValidate.addInvRules(),
     invValidate.checkInvData,
     utilities.handleErrors(invController.addInv)
@@ -36,9 +41,13 @@ router.post("/add-inventory",
 
 // Route ro post update to an inventory
 router.post("/update", 
+    utilities.checkAccountType,
     invValidate.addInvRules(),
     invValidate.checkUpdateData,
     utilities.handleErrors(invController.updateInventory)
 );
+
+router.post("/delete", utilities.checkAccountType, utilities.handleErrors(invController.deleteInventory));
+
 
 module.exports = router;
