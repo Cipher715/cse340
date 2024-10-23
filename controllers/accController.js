@@ -41,13 +41,14 @@ async function buildAccountPage(req, res, next) {
     let nav = await utilities.getNav()
     let tools = await utilities.getHeader(req);
     let token = req.cookies.jwt;
-    let userInfo;
+    let userId;
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
       if (err) {
         return res.status(403).send('Invalid token');
       }
-      userInfo = decoded;
+      userId = decoded.account_id;
     });
+    let userInfo = await accModel.getAccountById(userId);
     let greet = '<h2>Welcome ' + userInfo.account_firstname + '</h2>';
     greet += '<p><a title="Account Management Page" href="/account/update/' + userInfo.account_id + '">Update account information</a></p>';
     if (userInfo.account_type == 'Employee' || userInfo.account_type == 'Admin'){
