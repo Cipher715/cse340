@@ -22,6 +22,11 @@ router.get("/edit/:invId", utilities.checkAccountType, utilities.handleErrors(in
 // Route to build inventory deletion view
 router.get("/delete/:invId", utilities.checkAccountType, utilities.handleErrors(invController.deleteInventoryView));
 
+// Enhancement. Route to build stock view
+router.get("/stock", utilities.handleErrors(invController.buildStock));
+// Route to build stock view table
+router.get("/stock/:order", utilities.handleErrors(invController.sortInventory));
+
 
 // Route to post new classification
 router.post("/add-classification", 

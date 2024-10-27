@@ -1,0 +1,24 @@
+<% if (title) { %>
+    <h1 class="edit-inventory-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+} %>
+
+<% if (messages) { %>
+    <%- messages() %>
+<%}%> 
+
+<% if (errors) { %>
+    <ul class="notice">
+    <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+<% } %>
+
+<p>Welcome to our inventory. please select sorting order from the list.</p>
+<%- sortList %>
+
+<table id="inventoryList"></table>
+
+<script src="../../js/inv-stock.js"></script>

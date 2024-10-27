@@ -87,6 +87,22 @@ invCont.buildAddInv = async function (req, res, next) {
   })
 };
 
+/* ***************************
+ *  Build stock view
+ * ************************** */
+invCont.buildStock = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let tools = await utilities.getHeader(req);
+  let sortList = await utilities.buildSortList();
+  res.render("inventory/stock", {
+    title: "Our Stock",
+    nav,
+    tools,
+    errors: null,
+    sortList,
+  })
+};
+
 
 /* ***************************
  *  Insert new classification and examine
@@ -233,6 +249,19 @@ invCont.deleteInventory = async function (req, res) {
 invCont.getInventoryJSON = async (req, res, next) => {
   const classification_id = parseInt(req.params.classification_id)
   const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
+
+/* ***************************
+ *  Return Sorted Inventory As JSON
+ * ************************** */
+invCont.sortInventory = async (req, res, next) => {
+  const order = req.params.order
+  const invData = await invModel.sortInventory(order)
   if (invData[0].inv_id) {
     return res.json(invData)
   } else {

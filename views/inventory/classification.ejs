@@ -4,6 +4,8 @@
       res.redirect('/')
     } %>
 
-<%# messages() %>
+<% if (messages) { %>
+  <%- messages() %>
+<%}%> 
 
 <%- grid %>

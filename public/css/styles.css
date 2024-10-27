@@ -318,7 +318,7 @@ input:required:valid, textarea:required:valid, select:required:valid {
   color: red;
 }
 
-#inventoryDisplay {
+#inventoryDisplay, #inventoryList {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -329,23 +329,25 @@ input:required:valid, textarea:required:valid, select:required:valid {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#inventoryDisplay thead tr {
+#inventoryDisplay thead tr, #inventoryList thead tr {
   background-color: #3498db;
   color: white;
   text-align: left;
   font-weight: bold;
 }
 
-#inventoryDisplay th, #inventoryDisplay td {
+#inventoryDisplay th, #inventoryDisplay td,
+#inventoryList th, #inventoryList td {
   padding: 12px 15px;
   border: 1px solid #ddd;
 }
 
-#inventoryDisplay th:first-child {
+#inventoryDisplay th:first-child, #inventoryList th:first-child{
   width: 60%;
 }
 
-#inventoryDisplay tbody tr:nth-child(even) {
+#inventoryDisplay tbody tr:nth-child(even),
+#inventoryList tbody tr:nth-child(even){
   background-color: #f2f2f2;
 }
 

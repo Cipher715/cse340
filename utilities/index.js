@@ -68,6 +68,7 @@ Util.getNav = async function (req, res, next) {
     let data = await invModel.getClassifications();
     let list = "<ul>";
     list += '<li><a href="/" title="Home page">Home</a></li>';
+    list += '<li><a href="/inv/stock/" title="Stock Page">Stock</a></li>';
     data.rows.forEach((row) => {
         list += "<li>";
         list +=
@@ -122,6 +123,22 @@ Util.buildClassificationList = async function (classification_id = null) {
   classificationList += "</select>"
   return classificationList
 };
+
+
+Util.buildSortList = async function () {
+  let sortList = '<select name="inv_sort" id="inv_sort">'
+  sortList += "<option value=''>Choose a Sort</option>"
+  + "<option value='inv_price-ASC'>Price: Low to High</option>"
+  + "<option value='inv_price-DESC'>Price: High to Low</option>"
+  + "<option value='inv_miles-ASC'>Miles: Low to High</option>"
+  + "<option value='inv_miles-DESC'>Miles: High to Low</option>"
+  + "<option value='inv_year-DESC'>Build Year: Recent to Old</option>"
+  + "<option value='inv_year-ASC'>Build Year: Old to Recent</option>"
+  + "</select>";
+
+  return sortList;
+}
+
 
 /* ****************************************
  * Middleware For Handling Errors

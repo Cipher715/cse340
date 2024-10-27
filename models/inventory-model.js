@@ -42,6 +42,22 @@ async function getVehicleByInvId(inv_id) {
 }
 
 /* ****************************
+*  Get sorted vehicle list
+* **************************** */
+async function sortInventory(order) {
+  try{
+    sort_order = order.replace(/-/g, " ");
+    const data = await pool.query(
+      `SELECT * FROM public.inventory 
+      ORDER BY ${sort_order}`
+    )
+    return data.rows
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+/* ****************************
 *  Insert new classification
 * **************************** */
 async function addClass(classification_name){
@@ -117,5 +133,15 @@ async function deleteInventory(inv_id){
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleByInvId, addClass, checkExistingClass, checkClass, addInv, updateInventory, deleteInventory};
+module.exports = {
+  getClassifications, 
+  getInventoryByClassificationId, 
+  getVehicleByInvId, 
+  sortInventory,
+  addClass, 
+  checkExistingClass, 
+  checkClass, 
+  addInv, 
+  updateInventory, 
+  deleteInventory};
 
