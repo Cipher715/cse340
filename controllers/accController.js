@@ -49,6 +49,7 @@ async function buildAccountPage(req, res, next) {
       userId = decoded.account_id;
     });
     let userInfo = await accModel.getAccountById(userId);
+    console.log(userInfo)
     let greet = '<h2>Welcome ' + userInfo.account_firstname + '</h2>';
     greet += '<p><a title="Account Management Page" href="/account/update/' + userInfo.account_id + '">Update account information</a></p>';
     if (userInfo.account_type == 'Employee' || userInfo.account_type == 'Admin'){
